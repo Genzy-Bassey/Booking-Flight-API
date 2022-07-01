@@ -1,6 +1,8 @@
-import express, { response, Router } from 'express';
-import bodyParser from 'body-parser'
-import cors from "cors"
+
+// import express, { response, Router } from 'express';
+// import bodyParser from 'body-parser'
+// import cors from "cors"
+
 
 const express = require("express");
 const { json } = require("express");
@@ -14,7 +16,7 @@ app.use(json());
 
 app.use("/", routes);
 
-app.use(bodyParser.json())
+// app.use(bodyParser.json())
 
 //Add/book flight
 //get all flight
@@ -22,12 +24,11 @@ app.use(bodyParser.json())
 //update/edit flight
 //delete flight
 
-app.use(cors({
-    origin: 'http://localhost:4200'
-}));
+// app.use(cors({
+//     origin: 'http://localhost:4200'
+// }));
 
 const port = process.env.PORT || 3000;
-
 
 app.get(`/Get-all-flight`, (req, res) => {
 
@@ -64,7 +65,7 @@ app.get(`/Get-all-flight`, (req, res) => {
   
 
 
-    singleflight.post(
+    models.post(
         JSON.stringify({
             'data': {
               "title": "Flight To Canada",
@@ -88,7 +89,7 @@ app.put(`/Update-Edit-Flight`, (req, res) => {
   const flight = req.body.flight
   
   // Update/Edit Flight
-  editflight.put(
+  flight.put(
       JSON.stringify({
           'data': {
             "title": "Flight To Canada",
@@ -137,12 +138,12 @@ res.send(response);
 });
 
 
-Router.delete(`/Delete-Flight`, (req, res) => {
+app.delete(`/Delete-Flight`, (req, res) => {
 
   const flight = req.body.flight
   
   // Delete A Flight
-  Router.get(
+  app.get(
       JSON.stringify({
           'data': {
             "title": "Flight To Canada",
@@ -162,5 +163,5 @@ Router.delete(`/Delete-Flight`, (req, res) => {
 
 
 app.listen(port, () => {
-  console.log(`Server is running on port: http://localhost:${port}`);
 });
+
